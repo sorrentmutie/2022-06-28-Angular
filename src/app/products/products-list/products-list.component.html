@@ -1,0 +1,38 @@
+<p>products-list works!</p>
+
+<div *ngIf="products && products.length > 0; else elseBlock">
+ <!-- <p>Ci sono {{products.length}} prodotti </p> -->
+
+  <p>{{products | headerProducts}}</p>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Prezzo</th>
+        <th>Image</th>
+        <th>Data</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+          <td>{{product.id}}</td>
+          <td>{{product.name | name | uppercase}}</td>
+          <td>{{product.price | currency: 'EUR'}}</td>
+          <td><img src="{{product.image}}"></td>
+          <td>{{product.releaseDate | date: 'dd/MM/yyyy'}}</td>
+          <td><button class="btn btn-success" (click)="showDetails(product)">Dettaglio</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
+
+<ng-template #elseBlock>
+  <p>Non ci sono prodotti</p>
+</ng-template>
+

@@ -1,0 +1,6 @@
+<p>product-details works!</p>
+<div *ngIf="product">
+  <p> Hai scelto {{product.name}}</p>
+  <input type="text" [(ngModel)]="product.name" id="nome" name="product.name">
+  <button class="btn btn-danger" (click)="back()">Torna Indietro</button>
+</div>
