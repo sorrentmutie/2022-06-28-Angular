@@ -1,0 +1,7 @@
+<button (click)="start()" class="btn btn-info">Avvia</button>
+<button (click)="stop()" class="btn btn-info">Ferma</button>
+<ul>
+  <li *ngFor="let customer of customers">
+    {{customer.name}} - {{customer.city}}
+  </li>
+</ul>

@@ -1,0 +1,13 @@
+<div *ngIf="data | async as users">
+
+<section *ngFor="let user of users.data">
+
+<div class="card text-white bg-primary mb-3">
+  <div class="card-header">{{user.first_name}} {{user.last_name}}</div>
+  <div class="card-body">
+    <h4 class="card-title">{{user.email}}</h4>
+    <img src="{{user.avatar}}">
+  </div>
+</div>
+
+</section>

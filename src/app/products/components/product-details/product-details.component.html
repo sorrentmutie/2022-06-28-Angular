@@ -1,0 +1,6 @@
+<article *ngIf="product">
+  <p>{{product.name}}</p>
+  <img src="{{product.picture}}">
+</article>
+
+<button (click)="back()" class="btn btn-info">Torna alla lista dei prodotti</button>

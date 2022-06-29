@@ -1,0 +1,11 @@
+<div class="row card-group" *ngIf=" usersObservable | async as response" >
+<div *ngFor="let user of response.results" class="col-4">
+  <div class="card text-white bg-primary mb-3">
+    <div class="card-header">{{user.name.first}} {{user.name.last}}</div>
+    <div class="card-body">
+      <h4 class="card-title">{{user.email}}</h4>
+      <img src="{{user.picture.large}}">
+    </div>
+  </div>
+</div>
+</div>

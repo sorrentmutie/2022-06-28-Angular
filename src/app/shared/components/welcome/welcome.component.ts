@@ -1,29 +1,40 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ObservableAuthService } from 'src/app/core/services/observable-auth.service';
+import { CurrentUser } from '../../models/current-user';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnDestroy {
+export class WelcomeComponent implements OnInit, OnDestroy {
 
   // isLogged = false;
-  isLoggedObservable: Observable<boolean> | undefined = undefined;
- //  subscription: Subscription | undefined = undefined;
+  currentUser: CurrentUser|undefined = undefined;
+  subscriptionInit: Subscription | undefined = undefined;
+  subscriptionLogin: Subscription | undefined = undefined;
 
-  constructor(private authService: AuthService) {
-    this.isLoggedObservable = this.authService.login();
+  constructor(private authService: AuthService, private observableAuthService:ObservableAuthService) {
+   
    //   console.log('inside welcome');
    //  this.subscription = this.authService.login().subscribe( isLogged => this.isLogged = isLogged);
   }
+  ngOnInit(): void {
+    this.subscriptionInit = this.observableAuthService.obsCurrentUser$?.subscribe(cu=>this.currentUser = cu);
+  }
   ngOnDestroy(): void {
    //  console.log('On destroy');
-    // this.subscription?.unsubscribe();
-    // unsubscribe();
+    this.subscriptionInit?.unsubscribe();
+    this.subscriptionLogin?.unsubscribe();
   }
-
+  Login(){
+    this.subscriptionLogin = this.authService.login().subscribe(cu=> this.currentUser = cu);
+  }
+  LogOut(){
+    this.authService.logout();
+  }
 
 
 }

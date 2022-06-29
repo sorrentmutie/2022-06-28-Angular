@@ -1,0 +1,40 @@
+
+<div *ngIf="products && products.length >0; else bloccoElse">
+
+  <p>Ci sono {{products.length}} prodotti</p>
+  <p *ngIf="person"> {{person.address | address }} </p>
+
+
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Prezzo</th>
+        <th>Data</th>
+        <th>Immagine</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let product of products">
+        <td>{{product.id}}</td>
+        <td>{{product.name | productName: "???"| uppercase}}</td>
+        <td>{{product.price | currency: "EUR"}}</td>
+        <td>{{product.releaseDate | date: "dd/MM/yyyy"}}</td>
+        <td><img src="{{product.picture}}"></td>
+        <td> <button (click)="showDetails(product)" class="btn btn-info">Mostra Dettaglio</button></td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+<ng-template #bloccoElse>
+
+  <p> Non ci sono prodotti disponibili</p>
+
+</ng-template>

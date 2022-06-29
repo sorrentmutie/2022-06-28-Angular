@@ -1,15 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CurrentUser } from 'src/app/shared/models/current-user';
+import { AuthService } from '../../services/auth.service';
+import { ObservableAuthService } from '../../services/observable-auth.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
-  constructor() { }
-
+  constructor(private authService:AuthService, private observableAuthService:ObservableAuthService) { }
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+  currentUser:CurrentUser|undefined = undefined;
+  private subscription:Subscription|undefined = undefined;
   ngOnInit(): void {
+    this.currentUser =this.authService.cu;
+    this.subscription = this.observableAuthService.obsCurrentUser$?.subscribe(cu=>this.currentUser = cu);
   }
 
+  Login(){
+    this.authService.login().subscribe(resp=>{
+      this.currentUser = resp;
+    });
+  }
+  Logout(){
+    this.authService.logout();
+    this.currentUser = this.authService.cu;
+    this.observableAuthService.onUserLogged(undefined);
+  }
 }
