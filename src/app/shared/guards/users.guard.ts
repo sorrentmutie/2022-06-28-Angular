@@ -16,11 +16,13 @@ export class UsersGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> {
     console.log('Sono nella guard');
 
-    if(this.authService.cu!==undefined) {
-      return of(true);
-    } else {
-      this.router.navigate(['/']);
-      return of(false);
-    }
+    return of(true);
+
+    // if(this.authService.cu!==undefined) {
+    //   return of(true);
+    // } else {
+    //   this.router.navigate(['/']);
+    //   return of(false);
+    // }
   }
 }

@@ -16,6 +16,9 @@ import { SecondInterceptor } from './shared/interceptors/second.interceptor';
 import { WelcomeComponent } from './shared/components/welcome/welcome.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { MenuComponent } from './core/components/menu/menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { MenuComponent } from './core/components/menu/menu.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: FirstInterceptor, multi: true},

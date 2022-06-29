@@ -6,6 +6,7 @@ import { CurrentUser } from 'src/app/shared/models/current-user';
   providedIn: 'root'
 })
 export class ObservableAuthService {
+  
   private sbjCurrentUser$:Subject<CurrentUser | undefined> | undefined = undefined;
   obsCurrentUser$:Observable<CurrentUser| undefined> | undefined = undefined;
   constructor() {
@@ -16,7 +17,7 @@ export class ObservableAuthService {
     this.sbjCurrentUser$?.next(cu);
    }
 
-   
+
 
 
 }
