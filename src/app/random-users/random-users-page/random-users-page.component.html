@@ -1,0 +1,12 @@
+<p>random-users-page works!</p>
+
+
+<section *ngIf="users && users.length > 0" class="row">
+   <div class="card col-md-4" style="width: 18rem;" *ngFor="let user of users">
+    <img src="{{user.picture.large}}" class="card-img-top" alt="Immagine mancante">
+    <div class="card-body">
+      <h5 class="card-title">{{user.name.first}}  {{user.name.last}} </h5>
+      <p>{{user.email}}</p>
+    </div>
+  </div>
+</section>

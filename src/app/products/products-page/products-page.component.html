@@ -1,10 +1,15 @@
 <p>products-page works!</p>
+<button class="btn btn-success" (click)="navigateToUsers()">Torna A Userso</button>
 
-<div *ngIf="!selectedProduct">
+<!-- <div *ngIf="!selectedProduct"> </div> -->
 <h2>Lista dei prodotti in offerta</h2>
 <app-products-list [products]="products" (notify)="showDetailsComponent($event)"></app-products-list>
-</div>
-<app-product-details (notify)="showTable($event)" [product]="selectedProduct"></app-product-details>
+
+
+<!-- <app-product-details (notify)="showTable($event)" [product]="selectedProduct"></app-product-details> -->
+
+
+
 
 <h2>Lista dei prodotti da riordinare</h2>
 <app-products-list [products]="productsToBeOrdered"></app-products-list>

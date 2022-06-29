@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,12 @@ import { ProductsListComponent } from './products/products-list/products-list.co
 import { NamePipe } from './products/pipes/name.pipe';
 import { HeaderProductsPipe } from './products/pipes/header-products.pipe';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { RandomUsersPageComponent } from './random-users/random-users-page/random-users-page.component';
+import { FirstInterceptor } from './shared/interceptors/first.interceptor';
+import { SecondInterceptor } from './shared/interceptors/second.interceptor';
+import { WelcomeComponent } from './shared/components/welcome/welcome.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { MenuComponent } from './core/components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +24,22 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
     ProductsListComponent,
     NamePipe,
     HeaderProductsPipe,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    RandomUsersPageComponent,
+    WelcomeComponent,
+    NotFoundComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: FirstInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: SecondInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
